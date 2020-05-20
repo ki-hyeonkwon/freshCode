@@ -1,17 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+import ReactDOM from "react-dom";
+import Routes from "./Routes";
+
+// 원래 코드
+const GlobalStyle = createGlobalStyle`
+
+  ${reset}
+  *{
+    box-sizing: border-box ;
+    cursor: default;
+  }
+  body {
+    font-family:  DungGuenMo, 'Noto Sans KR', sans-serif;   
+  };  
+  a {
+    text-decoration: none;
+    color: #000000
+  }
+`;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <GlobalStyle />
+    <Routes />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
