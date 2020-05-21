@@ -1,8 +1,11 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
 import ReactDOM from "react-dom";
 import Routes from "./Routes";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "Redux/rootReducer";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 // 원래 코드
 const GlobalStyle = createGlobalStyle`
@@ -22,9 +25,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <GlobalStyle />
-    <Routes />
-  </React.StrictMode>,
+  <Provider store={createStore(rootReducer)}>
+    <React.StrictMode>
+      <GlobalStyle />
+      <Routes />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );

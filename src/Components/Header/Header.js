@@ -20,5 +20,4 @@ const HeaderWrapper = styled.div`
 const PageLogo = styled.img`
   width: 162px;
   height: 51px;
-  //   background-image: url("https://www.freshcode.me/images/header-img/main-tap-logo@2x.png)
 `;
