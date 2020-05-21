@@ -5,7 +5,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ImageSlider = (props) => {
   const { bannerImg } = props;
-  console.log(bannerImg[0]);
   return (
     <ImageSliderWrapper>
       <Carousel
@@ -18,7 +17,7 @@ const ImageSlider = (props) => {
       >
         {bannerImg.length > 0 &&
           bannerImg.map((img, i) => {
-            return <img src={img.imgUrl} key={i} alt={i} />;
+            return <img src={img.imgUrl} key={img.id} alt={i} />;
           })}
       </Carousel>
     </ImageSliderWrapper>
