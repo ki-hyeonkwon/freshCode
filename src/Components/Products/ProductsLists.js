@@ -143,8 +143,7 @@ const Tag = styled.div`
   font-weight: 500;
   color: rgb(245, 163, 35);
   padding: 2px 5px;
-  margin-right: 3px;
-  margin-top: 3px;
+  margin: 3px 3px 0 0;
 `;
 
 const KindsOfPersonBox = styled.div`
@@ -152,6 +151,9 @@ const KindsOfPersonBox = styled.div`
   margin-left: auto;
   font-size: 10px;
   color: #f98c4e;
+  @media only screen and (max-width: 1200px) {
+    margin: 3px 0 0 0;
+  }
 `;
 
 const KindsOfPerson = styled.div`
