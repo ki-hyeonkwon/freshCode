@@ -8,14 +8,14 @@ import { URL } from "config";
 import styled from "styled-components";
 
 const ProductsMain = (props) => {
-  const { infos, addData } = props;
+  const { infos, cate, addData } = props;
+
   const getProductsData = async () => {
     try {
       const url = `${URL}/salads`;
       const res = await axios.get(url, {
         withCredentials: true,
       });
-      console.log("come on :", res.data.menus);
       addData(res.data.menus);
     } catch (error) {
       console.log(error);
@@ -28,26 +28,44 @@ const ProductsMain = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("리덕스로 받아지나? infos", infos);
-
   return (
     <ProductWrapper>
       <ProductsMainHeader></ProductsMainHeader>
-      {infos &&
-        infos.map((item) => {
-          //할인된 가격
-          const fullPrice = item.details[0].price - item.details[0].discount;
-          return (
-            <ProductsLists key={item.id} fullPrice={fullPrice} item={item} />
-          );
-        })}
+      {infos && cate === "전체보기"
+        ? infos.map((item) => {
+            //할인된 가격
+            const fullPrice = item.details[0].price - item.details[0].discount;
+            console.log("실제데이터의 카테고리", item.category);
+            console.log("스토어의 카테고리", cate);
+            return (
+              <ProductsLists key={item.id} fullPrice={fullPrice} item={item} />
+            );
+          })
+        : infos
+            .filter((item) => item.category === `["${cate}"]`)
+            .map((item) => {
+              //할인된 가격
+              const fullPrice =
+                item.details[0].price - item.details[0].discount;
+              console.log("실제데이터의 카테고리", item.category);
+              console.log("스토어의 카테고리", cate);
+              return (
+                <ProductsLists
+                  key={item.id}
+                  fullPrice={fullPrice}
+                  item={item}
+                />
+              );
+            })}
     </ProductWrapper>
   );
 };
 
 const mapStateToProps = (state) => {
+  console.log("스토어", state);
   return {
-    infos: state.getData.item,
+    infos: state.getData.items,
+    cate: state.getCategory.pickedCategory,
   };
 };
 
@@ -60,7 +78,7 @@ const ProductWrapper = styled.div`
   flex-wrap: wrap;
   font-family: Roboto, sans-serif;
 
-  @media only screen and (max-width: 900px) {
-    width: 95vw;
+  @media only screen and (max-width: 1200px) {
+    width: 98vw;
   }
 `;

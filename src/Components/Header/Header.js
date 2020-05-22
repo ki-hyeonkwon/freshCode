@@ -15,6 +15,12 @@ const HeaderWrapper = styled.div`
   margin: 10px;
   display: flex;
   align-items: center;
+  @media only screen and (max-width: 420px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+  }
 `;
 
 const PageLogo = styled.img`

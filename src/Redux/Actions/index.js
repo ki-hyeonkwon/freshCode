@@ -5,9 +5,9 @@ export const addData = (data) => {
   };
 };
 
-export const getCategory = (data) => {
+export const addCategory = (data) => {
   return {
-    type: "GET_CATEGORY",
-    pickedCategory: data,
+    type: "ADD_CATEGORY",
+    pickedCate: data,
   };
 };

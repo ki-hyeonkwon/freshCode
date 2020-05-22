@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { addCategory } from "Redux/Actions";
 import styled from "styled-components";
 
-const ProductsMainHeader = () => {
+const ProductsMainHeader = (props) => {
+  const { addCategory } = props;
   const [category, setCategory] = useState([
     "전체보기",
     "비건",
@@ -11,9 +14,9 @@ const ProductsMainHeader = () => {
   ]);
   const [clickedKey, setClickedKey] = useState();
 
-  const handleClick = (i) => {
+  const handleClick = (i, li) => {
     setClickedKey(i);
-    console.log(i);
+    addCategory(li);
   };
 
   return (
@@ -25,7 +28,7 @@ const ProductsMainHeader = () => {
             <Category
               key={i}
               id={i}
-              onClick={() => handleClick(i)}
+              onClick={() => handleClick(i, li)}
               clickedKey={clickedKey}
             >
               {li}
@@ -36,20 +39,27 @@ const ProductsMainHeader = () => {
     </HeaderWrapper>
   );
 };
-export default ProductsMainHeader;
+
+export default connect(null, { addCategory })(ProductsMainHeader);
 
 const HeaderWrapper = styled.div`
   width: 85vw;
   margin: 10px;
+  @media only screen and (max-width: 1200px) {
+    width: 100vw;
+  }
 `;
 
 const Title = styled.h3`
   display: block;
   margin-bottom: 13px;
   text-align: left;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 500;
   color: #3d3d3d;
+  @media only screen and (max-width: 1200px) {
+    text-align: center;
+  }
 `;
 
 const CategoryBox = styled.div`
@@ -62,9 +72,9 @@ const CategoryBox = styled.div`
 const Category = styled.span`
   font-size: 15px;
   text-align: center;
-  padding: 4px 13px;
+  padding: ${(props) =>
+    props.id === props.clickedKey ? "4px 13px 3px" : "4px 13px"};
   cursor: pointer;
-  border-bottom: 0.5px solid #e8e8e8;
   font-weight: ${(props) => (props.id === props.clickedKey ? "500" : "400")};
   border-bottom: ${(props) =>
     props.id === props.clickedKey
