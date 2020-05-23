@@ -11,3 +11,23 @@ export const addCategory = (data) => {
     pickedCate: data,
   };
 };
+
+export const closeModal = (text) => {
+  return {
+    type: "CLOSE_MODAL",
+    placeholder: text,
+  };
+};
+
+export const openModal = () => {
+  return {
+    type: "OPEN_MODAL",
+  };
+};
+
+export const getText = (text) => {
+  return {
+    type: "GET_TEXT",
+    placeholder: text,
+  };
+};

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
 import { URL } from "config";
 import ImageSlider from "Components/ImageSlider/ImageSlider";
 import Header from "Components/Header/Header";
 import ProductsMain from "Components/Products/ProductsMain";
+import Calender from "Components/Calender/Calender";
 
-const Main = () => {
+const Main = ({ modalStatus }) => {
   const [bannerImg, setbannerImg] = useState([]);
   const getBannerImg = async () => {
     try {
@@ -30,16 +32,24 @@ const Main = () => {
   }, []);
 
   return (
-    <MainWrapper>
+    <MainWrapper modalStatus={modalStatus}>
+      <Calender></Calender>
       <Header />
       {bannerImg.length > 0 && <ImageSlider bannerImg={bannerImg} />}
       <ProductsMain />
     </MainWrapper>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    modalStatus: state.controlModal.openModal,
+  };
+};
 
-export default Main;
+export default connect(mapStateToProps, {})(Main);
 
 const MainWrapper = styled.div`
   width: 100vw;
+  height: ${(props) => props.modalStatus && "100vh"};
+  overflow: ${(props) => props.modalStatus && "hidden"};
 `;
