@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addCategory } from "Redux/Actions";
+// import RangeDatePicker from "Components/DatePicker/RangeDatePicker";
+// import Calender from "Components/Calender/Calender";
+import DatePlaceHolder from "Components/Calender/DatePlaceHolder";
 import styled from "styled-components";
 
 const ProductsMainHeader = (props) => {
@@ -13,7 +16,6 @@ const ProductsMainHeader = (props) => {
     "유제품",
   ]);
   const [clickedKey, setClickedKey] = useState();
-
   const handleClick = (i, li) => {
     setClickedKey(i);
     addCategory(li);
@@ -22,20 +24,25 @@ const ProductsMainHeader = (props) => {
   return (
     <HeaderWrapper>
       <Title>프레시코드</Title>
-      <CategoryBox>
-        {category.map((li, i) => {
-          return (
-            <Category
-              key={i}
-              id={i}
-              onClick={() => handleClick(i, li)}
-              clickedKey={clickedKey}
-            >
-              {li}
-            </Category>
-          );
-        })}
-      </CategoryBox>
+      <FeatureBox>
+        <CategoryBox>
+          {category.map((li, i) => {
+            return (
+              <Category
+                key={i}
+                id={i}
+                onClick={() => handleClick(i, li)}
+                clickedKey={clickedKey}
+              >
+                {li}
+              </Category>
+            );
+          })}
+        </CategoryBox>
+        <DatePlaceHolder />
+        {/* <Calender></Calender> */}
+        {/* <RangeDatePicker></RangeDatePicker> */}
+      </FeatureBox>
     </HeaderWrapper>
   );
 };
@@ -57,15 +64,31 @@ const Title = styled.h3`
   font-size: 20px;
   font-weight: 500;
   color: #3d3d3d;
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 720px) {
     text-align: center;
   }
 `;
 
-const CategoryBox = styled.div`
-  margin: 20px 0 30px 0;
+const FeatureBox = styled.div`
+  margin: 25px 0 5px 0;
+  display: flex;
+  justify-content: space-between;
+  @media only screen and (max-width: 720px) {
+    display: block;
+  }
   @media only screen and (max-width: 340px) {
     margin: 10px 0 20px 0;
+  }
+`;
+
+const CategoryBox = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  @media only screen and (max-width: 720px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

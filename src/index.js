@@ -7,13 +7,15 @@ import rootReducer from "Redux/rootReducer";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+const store = createStore(rootReducer);
+
 // 원래 코드
 const GlobalStyle = createGlobalStyle`
-
   ${reset}
   *{
     box-sizing: border-box ;
     cursor: default;
+
   }
   body {
     font-family:  DungGuenMo, 'Noto Sans KR', sans-serif;   
@@ -25,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-  <Provider store={createStore(rootReducer)}>
+  <Provider store={store}>
     <React.StrictMode>
       <GlobalStyle />
       <Routes />
