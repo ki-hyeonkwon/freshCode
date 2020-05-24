@@ -7,7 +7,6 @@ import "react-day-picker/lib/style.css";
 
 //yyyy-mm-dd 형태로 변환
 const DateFormat = (date) => {
-  console.log(typeof date);
   const dateSplit = date
     .split(" ")
     .join("")
@@ -15,11 +14,9 @@ const DateFormat = (date) => {
     .filter((e) => e.length !== 0);
   dateSplit.forEach((el, i) => {
     if (el.length === 1) {
-      console.log(el.length);
       dateSplit[i] = "0" + el;
     }
   });
-  console.log(dateSplit.join("-"));
   return dateSplit.join("-");
 };
 
@@ -53,9 +50,7 @@ const Calender = (props) => {
     if (modifiers.disabled) {
       return;
     } else {
-      console.log(day.toLocaleDateString());
       const stringDay = day.toLocaleDateString();
-      console.log(stringDay);
       const newFromDate = DateFormat(stringDay);
       setSelectedDay(newFromDate);
     }
