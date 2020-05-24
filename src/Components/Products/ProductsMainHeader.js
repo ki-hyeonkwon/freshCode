@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addCategory } from "Redux/Actions";
-// import RangeDatePicker from "Components/DatePicker/RangeDatePicker";
-// import Calender from "Components/Calender/Calender";
-import DatePlaceHolder from "Components/Calender/DatePlaceHolder";
 import styled from "styled-components";
 
 const ProductsMainHeader = (props) => {
   const { addCategory } = props;
+
+  // eslint-disable-next-line no-unused-vars
   const [category, setCategory] = useState([
     "전체보기",
     "비건",
@@ -16,6 +15,7 @@ const ProductsMainHeader = (props) => {
     "유제품",
   ]);
   const [clickedKey, setClickedKey] = useState();
+
   const handleClick = (i, li) => {
     setClickedKey(i);
     addCategory(li);
@@ -39,9 +39,6 @@ const ProductsMainHeader = (props) => {
             );
           })}
         </CategoryBox>
-        <DatePlaceHolder />
-        {/* <Calender></Calender> */}
-        {/* <RangeDatePicker></RangeDatePicker> */}
       </FeatureBox>
     </HeaderWrapper>
   );

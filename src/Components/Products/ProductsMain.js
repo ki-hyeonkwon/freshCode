@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { addData, openModal } from "Redux/Actions";
+import { addData } from "Redux/Actions";
 import axios from "axios";
+import { URL } from "config";
 import ProductsLists from "Components/Products/ProductsLists";
 import ProductsMainHeader from "Components/Products/ProductsMainHeader";
-
-import { URL } from "config";
 import styled from "styled-components";
 
 const ProductsMain = (props) => {
-  const { infos, cate, addData, modalStatus, openModal } = props;
+  const { infos, cate, addData } = props;
 
+  //상품 카탈로그 데이터를 받아온다.
   const getProductsData = async () => {
     try {
       const url = `${URL}/salads`;
@@ -28,18 +28,6 @@ const ProductsMain = (props) => {
     getProductsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const handleTouchMove = (event) => {
-      if (modalStatus) {
-        event.preventDefault(); // 여기가 핵심
-      }
-    };
-    window.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
-    return () => window.removeEventListener("touchmove", handleTouchMove);
-  }, [modalStatus]);
 
   return (
     <ProductWrapper>
@@ -74,11 +62,10 @@ const mapStateToProps = (state) => {
   return {
     infos: state.getData.items,
     cate: state.getCategory.pickedCategory,
-    modalStatus: state.controlModal.openModal,
   };
 };
 
-export default connect(mapStateToProps, { addData, openModal })(ProductsMain);
+export default connect(mapStateToProps, { addData })(ProductsMain);
 
 const ProductWrapper = styled.div`
   width: 85vw;
