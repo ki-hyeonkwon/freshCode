@@ -29,4 +29,4 @@ HTML, Styled Component, ReactJS, Redux
 
 ## 데모영상
 
-<!-- [클론 영상 보러가기](https://youtu.be/) -->
+[영상 보러가기](https://youtu.be/nngmojzfRoo
