@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
 import { URL } from "config";
@@ -33,20 +32,15 @@ const Main = ({ modalStatus }) => {
 
   return (
     <MainWrapper modalStatus={modalStatus}>
-      <Calender></Calender>
       <Header />
       {bannerImg.length > 0 && <ImageSlider bannerImg={bannerImg} />}
       <ProductsMain />
+      <Calender></Calender>
     </MainWrapper>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    modalStatus: state.controlModal.openModal,
-  };
-};
 
-export default connect(mapStateToProps, {})(Main);
+export default Main;
 
 const MainWrapper = styled.div`
   width: 100vw;
