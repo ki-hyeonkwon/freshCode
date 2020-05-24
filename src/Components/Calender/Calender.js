@@ -49,12 +49,16 @@ const Calender = (props) => {
   };
 
   //react-dady-picker 에서 날짜 클릭 시 event
-  const handleDayClick = (day) => {
-    console.log(day.toLocaleDateString());
-    const stringDay = day.toLocaleDateString();
-    console.log(stringDay);
-    const newFromDate = DateFormat(stringDay);
-    setSelectedDay(newFromDate);
+  const handleDayClick = (day, modifiers = {}) => {
+    if (modifiers.disabled) {
+      return;
+    } else {
+      console.log(day.toLocaleDateString());
+      const stringDay = day.toLocaleDateString();
+      console.log(stringDay);
+      const newFromDate = DateFormat(stringDay);
+      setSelectedDay(newFromDate);
+    }
   };
 
   useEffect(() => {
