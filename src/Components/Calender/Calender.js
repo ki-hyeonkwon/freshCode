@@ -6,13 +6,14 @@ import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 
 //yyyy-mm-dd 형태로 변환
-const DateFormat = (date) => {
+const dateFormat = (date) => {
   const dateSplit = date
     .split(" ")
     .join("")
     .split(".")
     .filter((e) => e.length !== 0);
-  dateSplit.forEach((el, i) => {
+  // eslint-disable-next-line array-callback-return
+  dateSplit.map((el, i) => {
     if (el.length === 1) {
       dateSplit[i] = "0" + el;
     }
@@ -32,8 +33,8 @@ const Calender = (props) => {
       const res = await axios.get(url, {
         withCredentials: true,
       });
-      const dayOffArr = res.data.holidays;
-      const daysArr = dayOffArr.map((el) => {
+      // 휴일 데이터만 모은 배열 => res.data.holidays
+      const daysArr = res.data.holidays.map((el) => {
         return new Date(el.holiday.split("-"));
       });
 
@@ -47,12 +48,10 @@ const Calender = (props) => {
 
   //react-dady-picker 에서 날짜 클릭 시 event
   const handleDayClick = (day, modifiers = {}) => {
-    if (modifiers.disabled) {
-      return;
-    } else {
-      const stringDay = day.toLocaleDateString();
-      const newFromDate = DateFormat(stringDay);
-      setSelectedDay(newFromDate);
+    //disbaledDate 클릭 시 modifiers는 true
+    if (!modifiers.disabled) {
+      // day를 string로 변환 후 dateFormat 함수에 인자로 전달 => 반환된 값 selectedDay로 state에 저장
+      setSelectedDay(dateFormat(day.toLocaleDateString()));
     }
   };
 

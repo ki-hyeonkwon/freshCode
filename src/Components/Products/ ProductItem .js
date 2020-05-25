@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ProductsLists = (props) => {
-  const { item, fullPrice } = props;
+  const { item, discountedPrice } = props;
   return (
     <PruductList key={item.id}>
       <ImgWrapper src={item.imgUrl} title={item.name}></ImgWrapper>
       <ProductInfoContainer>
         <Name>{item.name}</Name>
         <Summary>{item.summary}</Summary>
-        {item.summaryDetail === "" ? (
+
+        {item.details[0].price === 1 ? (
           ""
         ) : item.details[0].discount === 0 ? (
           <PriceContainer>
@@ -29,26 +29,24 @@ const ProductsLists = (props) => {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </SalePrice>
             ~
-            <FullPrice>
-              {fullPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </FullPrice>
+            <Discounted>
+              {discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Discounted>
           </PriceContainer>
         )}
+
         <SummaryDetail>{item.summaryDetail}</SummaryDetail>
         <TagsContainer>
           <TagsBox>
             {item.tags
               .filter((e, i) => i !== 0)
-              //   .slice(1, item.tags.length - 1)
               .map((list, i) => (
                 <Tag>{list.name}</Tag>
               ))}
           </TagsBox>
           <KindsOfPersonBox>
-            {item.tags[0] !== undefined ? (
+            {item.tags[0] !== undefined && (
               <KindsOfPerson>{item.tags[0].name}</KindsOfPerson>
-            ) : (
-              ""
             )}
           </KindsOfPersonBox>
         </TagsContainer>
@@ -105,7 +103,7 @@ const SalePrice = styled.span`
   color: #27b06e;
 `;
 
-const FullPrice = styled.span`
+const Discounted = styled.span`
   font-size: 14px;
   text-decoration: line-through;
   font-weight: 200;

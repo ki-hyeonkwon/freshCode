@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { addData } from "Redux/Actions";
 import axios from "axios";
 import { URL } from "config";
-import ProductsLists from "Components/Products/ProductsLists";
+import ProductItem from "Components/Products/ ProductItem ";
 import ProductsMainHeader from "Components/Products/ProductsMainHeader";
 import styled from "styled-components";
 
@@ -31,25 +31,30 @@ const ProductsMain = (props) => {
 
   return (
     <ProductWrapper>
-      <ProductsMainHeader></ProductsMainHeader>
-      {infos && cate === "전체보기"
+      <ProductsMainHeader />
+      {cate === "전체보기"
         ? infos.map((item) => {
             //할인된 가격
-            const fullPrice = item.details[0].price - item.details[0].discount;
+            const discountedPrice =
+              item.details[0].price - item.details[0].discount;
             return (
-              <ProductsLists key={item.id} fullPrice={fullPrice} item={item} />
+              <ProductItem
+                key={item.id}
+                discountedPrice={discountedPrice}
+                item={item}
+              />
             );
           })
         : infos
             .filter((item) => item.category === `["${cate}"]`)
             .map((item) => {
               //할인된 가격
-              const fullPrice =
+              const discountedPrice =
                 item.details[0].price - item.details[0].discount;
               return (
-                <ProductsLists
+                <ProductItem
                   key={item.id}
-                  fullPrice={fullPrice}
+                  discountedPrice={discountedPrice}
                   item={item}
                 />
               );

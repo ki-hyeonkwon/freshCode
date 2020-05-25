@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { URL } from "config";
-import ImageSlider from "Components/ImageSlider/ImageSlider";
-import Header from "Components/Header/Header";
+import ImageSlider from "Components/ImageSlider";
+import Header from "Components/Header";
 import ProductsMain from "Components/Products/ProductsMain";
-import Calender from "Components/Calender/Calender";
+import Calender from "Components/Calender";
 
 const Main = ({ modalStatus }) => {
   const [bannerImg, setbannerImg] = useState([]);
@@ -13,13 +13,13 @@ const Main = ({ modalStatus }) => {
     try {
       const url = `${URL}/banners`;
       // => proxy서버 사용시 아래 코드 이용.
-      const res = await axios.get(url, {
-        withCredentials: true,
-      });
+      // const res = await axios.get(url, {
+      //   withCredentials: true,
+      // });
       // => 나만의 크롬 만들기 시 사용.
-      //   const res = await axios.get(url, {});
-      const getImageInfo = res.data.banners;
-      setbannerImg(getImageInfo);
+      const res = await axios.get(url);
+
+      setbannerImg(res.data.banners);
     } catch (error) {
       console.log(error);
       alert("다시 시도하시기 바랍니다.");
@@ -35,7 +35,7 @@ const Main = ({ modalStatus }) => {
       <Header />
       {bannerImg.length > 0 && <ImageSlider bannerImg={bannerImg} />}
       <ProductsMain />
-      <Calender></Calender>
+      <Calender />
     </MainWrapper>
   );
 };
