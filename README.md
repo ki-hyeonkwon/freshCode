@@ -1,4 +1,4 @@
-# Seolleung-hotel
+# Freshcode
 
 ## 소개
 
