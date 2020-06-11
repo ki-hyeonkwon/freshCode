@@ -18,7 +18,7 @@ HTML, Styled Component, ReactJS, Redux
 
 #### 상품 카탈로그
 
-- category를 클릭할 때 해당 component로 이동할 수 있게 구현.
+- category를 클릭할 때 해당 category에 해당하는 카탈로그만 나올 수 있게 구현.
 
 #### 캘린더
 
