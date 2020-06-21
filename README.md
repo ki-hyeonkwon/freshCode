@@ -1,4 +1,4 @@
-# Freshcode
+# FreshCode
 
 ## 소개
 
